@@ -3,20 +3,20 @@
     <head>
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <script src="js/htmx.min.js"></script>
+        <!-- <script src="/src/js/htmx.min.js"></script> -->
+        <script src="https://unpkg.com/htmx.org@1.9.12"
+                integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+                crossorigin="anonymous"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Media Vocabulary</title>
+        <title>
+            {% block title %}Media Vocabulary{% endblock %}
+        </title>
     </head>
     <body>
-        <h1>Media Vocabulary</h1>
-        <h2>{{ publication }}</h2>
-        <main class="flex">
-            <div>{% include 'layout/partials/articles.html' %}</div>
-            <div class=" p-10 ml-10">
-                <p>Article text goes here</p>
-            </div>
+        <main class="flex flex-col m-10">
+            {% block content %}No content{% endblock %}
         </main>
         {% include 'layout/partials/footer.html' %}
     </body>

@@ -1,0 +1,8 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+    {% include 'home/partials/pagination.html' %}
+    <div class="sm:flex flex-row">
+        {% include 'home/partials/articles_table.html' %}
+        {% include 'home/partials/text_analysis.html' %}
+    </div>
+{% endblock %}
