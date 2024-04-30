@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from routers import root, articles
+from routers import root, articles, partials
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.openapi.utils import get_openapi
@@ -18,6 +18,7 @@ import uvicorn
 app = FastAPI()
 app.include_router(root.router)
 app.include_router(articles.router)
+app.include_router(partials.router)
 
 # ------------------------------------------------------------------------------
 # Static Files

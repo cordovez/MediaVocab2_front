@@ -10,6 +10,7 @@ class Article(BaseModel):
     teaser: Optional[str] = None
     author: Optional[str] = None
     published: Optional[str] = None
+    published_parsed: Optional[str] = None
     content: Optional[str] = None
     url: Optional[str] = None
     has_analysis: bool = False
@@ -37,12 +38,20 @@ class ArticlesDB:
             ),
             reverse=True,
         )
-        for article in sorted_articles:
-            article_date = datetime.datetime.strptime(
+        return sorted_articles
+
+    def _parse_date(self, articles):
+        parsed_articles = []
+        for article in articles:
+            # Create a copy of the original article dictionary
+            datetime_format = datetime.datetime.strptime(
                 article["published"], "%a %d %b %Y %H.%M %Z"
             )
-            article["published"] = article_date.strftime("%d/%m/%y")
-        return sorted_articles
+            parsed_date_string = datetime_format.strftime("%d/%m/%y")
+            article["published_parsed"] = parsed_date_string
+            parsed_articles.append(article)
+
+        return parsed_articles
 
     def _get_total_count(self):
         pass
@@ -62,5 +71,6 @@ class ArticlesDB:
         articles = data.get("articles")
         count = data.get("count")
         sorted_articles = self._sort_articles(articles)
+        parsed_date_articles = self._parse_date(sorted_articles)
 
-        return ArticlesResponse(count=count, articles=sorted_articles)
+        return ArticlesResponse(count=count, articles=parsed_date_articles)

@@ -33,8 +33,10 @@ router = APIRouter(prefix="/articles")
 # --------------------------------------------------------------------------------
 
 
-async def _build_full_page_context(request: Request, db: ArticlesDB):
-    response = await db.get_articles()
+async def _build_full_page_context(
+    request: Request, db: ArticlesDB, limit: int = 5, skip: int = 0
+):
+    response = await db.get_articles(limit, skip)
 
     return {
         "request": request,
@@ -61,10 +63,10 @@ async def _build_full_page_context(request: Request, db: ArticlesDB):
     response_class=HTMLResponse,
     response_model=None,
 )
-async def get_reminders(
-    request: Request,
-):
-    context = await _build_full_page_context(request, ArticlesDB(name="The Guardian"))
+async def get_reminders(request: Request, limit: int = 5, skip: int = 0):
+    context = await _build_full_page_context(
+        request, ArticlesDB(name="The Guardian"), limit, skip
+    )
     return templates.TemplateResponse("pages/articles.html", context)
 
 

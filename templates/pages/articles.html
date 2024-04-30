@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="/static/js/htmx.min.js"></script>
-        <title>Articles</title>
-    </head>
-    <body>{{ publication }}</body>
-</html>
+{% extends 'layout/base.html' %}
+{% block title %}Articles | MV{% endblock %}
+{% block content %}
+    <div class="flex flex-col items-start  max-w-[90%] mx-auto">
+        <p class="mb-2 px-10">There are {{ count }} articles in the database</p>
+        <div class="px-10 mb-2">{% include 'pages/partials/pagination.html' %}</div>
+        <div class="flex  justify-center px-10">
+            <div class="min-w-[50%]" id="articles-table">{% include 'pages/partials/articles_table.html' %}</div>
+            <div>{% include "pages/partials/text_area.html" %}</div>
+        </div>
+    </div>
+{% endblock %}
