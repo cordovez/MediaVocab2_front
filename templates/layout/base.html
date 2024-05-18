@@ -11,10 +11,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            {% block title %}Media Vocabulary{% endblock %}
+            {% block title %}MediaVocabulary{% endblock %}
         </title>
     </head>
-    <body class="bg-[#FEF9F5]">
+    <body class="bg-[#e0dcd9]" hx-boost="true">
+        {% include "layout/partials/header.html" %}
         <main>
             {% block content %}No content{% endblock %}
         </main>

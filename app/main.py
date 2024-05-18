@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from routers import root, articles, partials
+from routers import root_routes, articles_routes, partials_routes, analysis_routes
 
 from fastapi.staticfiles import StaticFiles
 from fastapi.openapi.utils import get_openapi
@@ -7,18 +7,15 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.exceptions import HTTPException
 import uvicorn
 
-# from infrastructure import app_setup
-# from fastapi.templating import Jinja2Templates
-
-
 # ------------------------------------------------------------------------------
 # App Creation
 # ------------------------------------------------------------------------------
 
 app = FastAPI()
-app.include_router(root.router)
-app.include_router(articles.router)
-app.include_router(partials.router)
+app.include_router(root_routes.router)
+app.include_router(articles_routes.router)
+app.include_router(partials_routes.router)
+app.include_router(analysis_routes.router)
 
 # ------------------------------------------------------------------------------
 # Static Files

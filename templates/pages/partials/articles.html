@@ -1,0 +1,30 @@
+<div class="" id="articles-table">
+    {% for article  in articles %}
+        <div class=" bg-white rounded mb-4 drop-shadow-sm p-2">
+            <article>
+                <h1 class="font-bold text-lg text-[#062962]">
+                    <a href="/article/{{ article.article_id }}" hx-push-url="true">{{ article.headline }}</a>
+                </h1>
+                <h3 class="text-slate-700 ">{{ article.teaser }}</h3>
+                <div class="flex justify-between mt-2 ">
+                    <address class="text-sm italic text-slate-500 ">{{ article.author }}</address>
+                    <time class="regular text-sm text-slate-500 "
+                          datetime="{{ article.published }}">| {{ article.published_parsed }}</time>
+                </div>
+            </article>
+            <div>
+                {% if article.has_analysis %}
+                    <button class="rounded h-[40px]  bg-green-600 text-white text-xs hover:bg-green-500 p-2"
+                            hx-get="/analysis/{{ article.id }}"
+                            hx-target="#analysis">see analysis</button>
+                {% else %}
+                    <button hx-get="/analysis/{{ article.id }}"
+                            hx-target="#analysis-results"
+                            class="rounded h-[40px]  bg-red-600 text-white text-xs hover:bg-red-500 p-2">
+                        generate analysis
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

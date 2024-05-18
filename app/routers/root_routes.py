@@ -20,6 +20,6 @@ async def get_favicon():
     return FileResponse("static/img/favicon.ico")
 
 
-@router.get(path="/not-found", summary='Gets the "Not Found" page', tags=["Pages"])
+@router.get(path="/not-found", summary='Returns "not-found.html"', tags=["Pages"])
 async def get_not_found(request: Request):
     return templates.TemplateResponse("pages/not-found.html", {"request": request})
